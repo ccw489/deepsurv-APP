@@ -1,0 +1,11 @@
+{
+  "input_dim": 10,
+  "hidden_sizes": [
+    32,
+    32
+  ],
+  "dropout": 0.0,
+  "activation": "ReLU",
+  "seed": 42,
+  "saved_at": "2025-11-13T17:07:13.386550"
+}
