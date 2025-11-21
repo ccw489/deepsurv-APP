@@ -373,7 +373,8 @@ def make_export_figure(expl, risk_label: str, risk_plain_text: str) -> plt.Figur
     # 设置SHAP图内部参数
     plt.rcParams['font.size'] = 10
     shap.plots.waterfall(expl, max_display=12, show=False)
-    ax_shap.set_title("SHAP waterfall plot", fontsize=13, fontfamily="Times New Roman", pad=15)
+    ax_shap.set_title("SHAP waterfall plot", fontsize=13
+                      , fontfamily="Times New Roman", pad=15)
 
     # Bottom: 风险描述
     ax_desc = fig.add_subplot(gs[2, 0])
@@ -521,16 +522,16 @@ def main():
     title_left, title_right = st.columns([1.2, 1.0])
 
     # 左：主标题 + 副标题
-    title_left.markdown("### 📊 DeepSurv Online Risk Calculator")
+    title_left.markdown("### 📊 DeepSurv-Based Risk Assessment Tool for HER2-Expressing Gastric Cancer")
     title_left.markdown(
-        '<p class="subheading">A calculator for predicting the risk of postoperative HER2 expression in gastric cancer patients.</p>',
+        '<p class="subheading">A calculator for predicting risk in patients with HER2-expressing gastric cancer after curative surgery.</p>',
         unsafe_allow_html=True,
     )
 
     # 右：SHAP 标题 + “Feature contributions...” （与左侧副标题同一高度）
     title_right.markdown("### 📉 SHAP waterfall plot")
     title_right.markdown(
-        '<p class="subheading">Feature contributions to the predicted risk for this patient.</p>',
+        '<p class="subheading">Feature-level contributions to the individualized risk prediction.</p>',
         unsafe_allow_html=True,
     )
 
@@ -545,9 +546,9 @@ def main():
                 <span>Model description</span>
             </div>
             <div>
-                This calculator uses a DeepSurv neural network trained on the study cohort. 
-                The model outputs an individualized risk score and classifies patients into 
-                high- or low-risk groups using the median risk as the cut-off.
+                This tool applies a DeepSurv neural network trained on a large cohort of patients with HER2-expressing gastric cancer. 
+                It generates an individualized postoperative survival risk score and assigns patients to high- or low-risk groups using 
+                a predefined cutoff from the training cohort.
             </div>
         </div>
         """,
@@ -562,9 +563,9 @@ def main():
                 <span>How to use</span>
             </div>
             <ul style="margin-bottom: 0;">
-                <li>Enter patient-specific clinicopathological features in the left sidebar.</li>
+                <li>Enter the patient's clinicopathological variables in the left panel.</li>
                 <li>Click <b>“Run Prediction”</b>.</li>
-                <li>Inspect the risk group and the SHAP waterfall plot for feature-level interpretation.</li>
+                <li>Review the predicted risk category and the SHAP waterfall plot for individualized interpretation.</li>
             </ul>
         </div>
         """,
@@ -646,7 +647,7 @@ def main():
     # ---------- Export button ----------
     if run and export_buffer is not None:
         right_col.download_button(
-            label="💾 Export current patient figure (600 DPI PNG)",
+            label="💾 Export SHAP figure (600-DPI PNG)",
             data=export_buffer,
             file_name="deepsurv_patient_explanation.png",
             mime="image/png",
