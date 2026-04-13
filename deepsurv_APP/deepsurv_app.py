@@ -325,7 +325,7 @@ binary_features_mapping: Dict[str, Dict[str, int]] = {
     "Vascular": {"No": 0, "Yes": 1},
     "Nerve": {"No": 0, "Yes": 1},
     "chemotherapy": {"No": 0, "Yes": 1},
-    "targeted_therpy": {"No": 0, "Yes": 1},
+    "targeted_therapy": {"No": 0, "Yes": 1},
     "targeted_therapy": {"No": 0, "Yes": 1},
 }
 
