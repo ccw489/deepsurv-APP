@@ -27,6 +27,14 @@ import matplotlib.pyplot as plt
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_BUNDLE_DIR = os.path.join(APP_DIR, "model_bundle")
 
+FEATURE_NAME_RENAMES = {
+    "targeted_therpy": "targeted_therapy",
+}
+
+
+def normalize_feature_name(feature_name: str) -> str:
+    return FEATURE_NAME_RENAMES.get(feature_name, feature_name)
+
 
 # ===========================
 #   1. CSS for compact style
@@ -185,9 +193,9 @@ def load_bundle(bundle_dir):
     with open(art_path, "rb") as f:
         artifacts = pickle.load(f)
 
-    feature_names = artifacts["feature_names"]
+    feature_names = [normalize_feature_name(name) for name in artifacts["feature_names"]]
     scaler = artifacts["scaler"]
-    background_X = artifacts["background_X"]
+    background_X = artifacts["background_X"].copy().rename(columns=FEATURE_NAME_RENAMES)
     train_stats = artifacts.get("train_scores_stats", {})
 
     # config
@@ -325,7 +333,6 @@ binary_features_mapping: Dict[str, Dict[str, int]] = {
     "Vascular": {"No": 0, "Yes": 1},
     "Nerve": {"No": 0, "Yes": 1},
     "chemotherapy": {"No": 0, "Yes": 1},
-    "targeted_therapy": {"No": 0, "Yes": 1},
     "targeted_therapy": {"No": 0, "Yes": 1},
 }
 
