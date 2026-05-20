@@ -327,7 +327,15 @@ DISPLAY_NAMES = {
     "nerve": "Perineural invasion",
     "vascular": "Vascular invasion",
     "number of lymph nodes removed": "Number of lymph nodes removed",
+    "number_of_lymph_nodes_removed": "Number of lymph nodes removed",
     "targeted_therapy": "Targeted therapy",
+}
+
+
+INTEGER_FEATURES = {
+    "age",
+    "number of lymph nodes removed",
+    "number_of_lymph_nodes_removed",
 }
 
 
@@ -340,6 +348,7 @@ CONTINUOUS_RANGES = {
     "BMI": (10.0, 50.0),
     "diameter": (0.0, 50.0),
     "number of lymph nodes removed": (0, 100),
+    "number_of_lymph_nodes_removed": (0, 100),
 }
 
 
@@ -472,14 +481,14 @@ def main():
             default_val = defaults.get(feat, (vmin + vmax) / 2.0)
             default_val = float(min(max(default_val, vmin), vmax))
 
-            if feat in ["age", "number of lymph nodes removed"]:
+            if feat in INTEGER_FEATURES:
                 user_input[feat] = st.sidebar.number_input(
                     pretty_name(feat),
                     min_value=int(vmin),
                     max_value=int(vmax),
                     value=int(round(default_val)),
                     step=1,
-                    key=f"feat_{feat}",
+                    key=f"feat_{feat}_integer",
                 )
             elif feat in ["BMI", "diameter"]:
                 user_input[feat] = st.sidebar.number_input(
