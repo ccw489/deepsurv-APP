@@ -481,7 +481,7 @@ def main():
                     step=1,
                     key=f"feat_{feat}",
                 )
-            elif feat == "BMI":
+            elif feat in ["BMI", "diameter"]:
                 user_input[feat] = st.sidebar.number_input(
                     pretty_name(feat),
                     min_value=float(vmin),
